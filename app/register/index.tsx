@@ -6,7 +6,7 @@ import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
 import { Text } from '~/components/ui/text';
-import { useRegisterMutation } from '~/hooks/useAuth';
+import { useRegisterMutation } from '~/lib/hooks/useAuth';
 import { useAuthStore } from '~/store/authStore';
 
 interface RegisterForm {

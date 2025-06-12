@@ -4,7 +4,7 @@ import type { LucideIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { View, type ViewProps } from 'react-native';
 import { Text } from '~/components/ui/text';
-import { cn } from '~/lib/utils';
+import { cn } from '~/lib/utils/cn';
 
 const alertVariants = cva(
   'relative bg-background w-full rounded-lg border border-border p-4 shadow shadow-foreground/10',
@@ -61,7 +61,7 @@ function AlertTitle({
   return (
     <Text
       className={cn(
-        'pl-7 mb-1 font-medium text-base leading-none tracking-tight text-foreground',
+        'mb-1 pl-7 text-base font-medium leading-none tracking-tight text-foreground',
         className,
       )}
       {...props}

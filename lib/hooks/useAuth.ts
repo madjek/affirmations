@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useAuthStore } from '~/store/authStore';
-import axiosInstance from '~/utils/axiosWithAuth';
+import axiosInstance from '../utils/axiosWithAuth';
 
 export const useRegisterMutation = () => {
   const { setTokens } = useAuthStore();

@@ -1,6 +1,6 @@
 'use client';
 import { ActivityIndicator, View } from 'react-native';
-import { useColorScheme } from '~/lib/useColorScheme';
+import { useColorScheme } from '~/lib/hooks/useColorScheme';
 
 export default function LoadingScreen() {
   const { isDarkColorScheme } = useColorScheme();

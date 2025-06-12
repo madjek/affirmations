@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, TextProps, View, ViewProps } from 'react-native';
 import { TextClassContext } from '~/components/ui/text';
-import { cn } from '~/lib/utils';
+import { cn } from '~/lib/utils/cn';
 
 function Card({
   className,
@@ -45,7 +45,7 @@ function CardTitle({
       role="heading"
       aria-level={3}
       className={cn(
-        'text-2xl text-card-foreground font-semibold leading-none tracking-tight',
+        'text-2xl font-semibold leading-none tracking-tight text-card-foreground',
         className,
       )}
       {...props}

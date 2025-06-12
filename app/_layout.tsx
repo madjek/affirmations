@@ -13,12 +13,14 @@ import * as React from 'react';
 import { Appearance, Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { LogoutButton } from '~/components/Logout';
+import Toast from 'react-native-toast-message';
+import { AuthProvider } from '~/components/providers/AuthProvider';
+import { SettingsButton } from '~/components/SettingsButton';
 import { ThemeToggle } from '~/components/ThemeToggle';
-import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
-import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/lib/useColorScheme';
-import { AuthProvider } from '~/providers/AuthProvider';
+import toastConfig from '~/components/toastConfig';
+import { NAV_THEME } from '~/lib/constants/constants';
+import { useColorScheme } from '~/lib/hooks/useColorScheme';
+import { setAndroidNavigationBar } from '~/lib/utils/android-navigation-bar';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -70,18 +72,27 @@ export default function RootLayout() {
                 options={{ title: 'Login', headerRight: () => <ThemeToggle /> }}
               />
               <Stack.Screen
-                name="affirmations/index"
+                name="affirmations/(tabs)"
                 options={{
                   title: 'Affirmations',
-                  headerRight: () => (
-                    <>
-                      <LogoutButton />
-                      <ThemeToggle />
-                    </>
-                  ),
+                  headerRight: () => <SettingsButton />,
+                }}
+              />
+              <Stack.Screen
+                name="settings/index"
+                options={{
+                  title: 'Settings',
+                  headerRight: () => <ThemeToggle />,
+                }}
+              />
+              <Stack.Screen
+                name="+not-found"
+                options={{
+                  title: 'Not found',
                 }}
               />
             </Stack>
+            <Toast config={toastConfig} />
             <PortalHost />
           </ThemeProvider>
         </AuthProvider>

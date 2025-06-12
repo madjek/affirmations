@@ -1,6 +1,6 @@
 import * as LabelPrimitive from '@rn-primitives/label';
 import * as React from 'react';
-import { cn } from '~/lib/utils';
+import { cn } from '~/lib/utils/cn';
 
 function Label({
   className,
@@ -22,7 +22,7 @@ function Label({
     >
       <LabelPrimitive.Text
         className={cn(
-          'text-sm text-foreground native:text-base font-medium leading-none web:peer-disabled:cursor-not-allowed web:peer-disabled:opacity-70',
+          'native:text-base text-sm font-medium leading-none text-foreground web:peer-disabled:cursor-not-allowed web:peer-disabled:opacity-70',
           className,
         )}
         {...props}

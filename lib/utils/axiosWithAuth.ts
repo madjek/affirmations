@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useAuthStore } from '~/store/authStore';
-import * as authApi from '../api/auth';
+import * as authApi from '../../api/auth';
 
 const axiosInstance = axios.create({
   baseURL: process.env.API_URL,

@@ -1,4 +1,4 @@
-import { useLogoutMutation } from '~/hooks/useAuth';
+import { useLogoutMutation } from '~/lib/hooks/useAuth';
 import { Logout } from '~/lib/icons/Logout';
 import { Button } from './ui/button';
 
