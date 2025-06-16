@@ -14,6 +14,8 @@ import { Appearance, Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
+import { AffirmationNotifier } from '~/components/AffirmationNotifier';
+import NotifierBackround from '~/components/notifierBackround';
 import { AuthProvider } from '~/components/providers/AuthProvider';
 import { SettingsButton } from '~/components/SettingsButton';
 import { ThemeToggle } from '~/components/ThemeToggle';
@@ -51,7 +53,11 @@ export default function RootLayout() {
       <SafeAreaProvider>
         <AuthProvider>
           <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-            <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+            <StatusBar
+              style={isDarkColorScheme ? 'light' : 'dark'}
+              backgroundColor={isDarkColorScheme ? 'black' : 'white'}
+              translucent={false}
+            />
             <Stack>
               <Stack.Screen
                 name="index"
@@ -92,6 +98,8 @@ export default function RootLayout() {
                 }}
               />
             </Stack>
+            <NotifierBackround />
+            <AffirmationNotifier />
             <Toast config={toastConfig} />
             <PortalHost />
           </ThemeProvider>

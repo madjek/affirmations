@@ -1,5 +1,5 @@
 import { RelativePathString, useRouter } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import CategorySelect from '~/components/CategorySelect';
@@ -48,12 +48,6 @@ export default function Add() {
       });
     }
   }, [isSuccess]);
-
-  const [triggerWidth, setTriggerWidth] = useState(0);
-
-  const onTriggerLayout = (event: any) => {
-    setTriggerWidth(event.nativeEvent.layout.width);
-  };
 
   return (
     <View className="flex-1 gap-6 p-6">

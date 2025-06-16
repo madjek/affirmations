@@ -11,8 +11,6 @@ export default function AllAffirmations() {
   const { language } = useSettingsStore();
   const { data, isLoading, isError } = usePublicAffirmationsQuery(language);
 
-  console.log(data);
-
   const [category, setCategory] = useState<AffirmationCategory>(
     AffirmationCategory.MOTIVATION,
   );

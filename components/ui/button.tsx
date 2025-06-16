@@ -5,7 +5,7 @@ import { TextClassContext } from '~/components/ui/text';
 import { cn } from '~/lib/utils/cn';
 
 const buttonVariants = cva(
-  'group flex items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
+  'group flex items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none duration-300 web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
   {
     variants: {
       variant: {
@@ -15,7 +15,7 @@ const buttonVariants = cva(
           'border border-input bg-background web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent',
         secondary: 'bg-secondary web:hover:opacity-80 active:opacity-80',
         ghost:
-          'web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent',
+          'web:hover:bg-accent web:hover:text-accent-foreground bg-transparent',
         link: 'web:underline-offset-4 web:hover:underline web:focus:underline',
       },
       size: {
@@ -33,7 +33,7 @@ const buttonVariants = cva(
 );
 
 const buttonTextVariants = cva(
-  'web:whitespace-nowrap text-sm native:text-base font-medium text-foreground web:transition-colors',
+  'web:whitespace-nowrap text-sm native:text-base duration-300 font-medium text-foreground web:transition-colors',
   {
     variants: {
       variant: {

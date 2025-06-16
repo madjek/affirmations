@@ -6,6 +6,7 @@ import {
   useSaveAffirmationMutation,
   useUnsaveAffirmationMutation,
 } from '~/lib/hooks/useAffirmation';
+import { Bell } from '~/lib/icons/Bell';
 import { CircleUser } from '~/lib/icons/CircleUser';
 import { Globe } from '~/lib/icons/Globe';
 import { Save } from '~/lib/icons/Save';
@@ -13,6 +14,7 @@ import { Share } from '~/lib/icons/Share';
 import { Affirmation } from '~/lib/interfaces/affirmation.interface';
 import { cn } from '~/lib/utils/cn';
 import { formatCategory } from '~/lib/utils/formatCategory';
+import { useAffirmationIdsStore } from '~/store/affirmationStore';
 import { Button } from './ui/button';
 import {
   ContextMenu,
@@ -37,6 +39,19 @@ export default function AffirmationCard({
   const { data } = useMyAffirmationsQuery();
   const isSaved = data?.some((a) => a.id === affirmation.id);
 
+  const addAffirmationId = useAffirmationIdsStore(
+    (state) => state.addAffirmationId,
+  );
+  const removeAffirmationId = useAffirmationIdsStore(
+    (state) => state.removeAffirmationId,
+  );
+  const hasAffirmationId = useAffirmationIdsStore(
+    (state) => state.hasAffirmationId,
+  );
+  const affirmationIds = useAffirmationIdsStore(
+    (state) => state.affirmationIds,
+  );
+
   useEffect(() => {
     if (isSuccess)
       Toast.show({
@@ -60,37 +75,47 @@ export default function AffirmationCard({
           <Text className="text-xs text-muted-foreground">
             {formatCategory(affirmation.category)}
           </Text>
-          {explore ? (
-            <>
-              {affirmation.createdByMe ? null : affirmation.createdByUser ? (
-                <CircleUser className="text-primary" size={16} />
-              ) : (
-                <View className="flex flex-row gap-1">
-                  {isSaved ? (
-                    <Save className="text-primary" size={16} />
-                  ) : (
-                    <Globe className="text-primary" size={16} />
-                  )}
-                </View>
-              )}
-            </>
-          ) : affirmation.saved ? (
-            <Save className="text-primary" size={16} />
-          ) : (
-            affirmation.isPublic && (
-              <Share
-                className={cn(
-                  affirmation.isApproved ? 'text-primary' : 'text-muted',
+          <View className="flex flex-row gap-1">
+            {explore ? (
+              <>
+                {affirmation.createdByMe ? null : affirmation.createdByUser ? (
+                  <CircleUser className="text-primary" size={16} />
+                ) : (
+                  <View className="flex flex-row gap-1">
+                    {isSaved ? (
+                      <Save className="text-primary" size={16} />
+                    ) : (
+                      <Globe className="text-primary" size={16} />
+                    )}
+                  </View>
                 )}
-                size={16}
-              />
-            )
-          )}
+              </>
+            ) : (
+              <>
+                {hasAffirmationId(affirmation.id) && (
+                  <Bell className="text-primary" size={16} />
+                )}
+                {affirmation.saved ? (
+                  <Save className="text-primary" size={16} />
+                ) : (
+                  affirmation.isPublic && (
+                    <Share
+                      className={cn(
+                        affirmation.isApproved ? 'text-primary' : 'text-muted',
+                      )}
+                      size={16}
+                    />
+                  )
+                )}
+              </>
+            )}
+          </View>
         </View>
-        {<Text className="mt-4 px-4 py-2 font-medium">{affirmation.text}</Text>}
+
+        <Text className="mt-4 px-4 py-2 font-medium">{affirmation.text}</Text>
       </ContextMenuTrigger>
-      {!affirmation.createdByMe && (
-        <ContextMenuContent align="start" className="p-0">
+      {!affirmation.createdByMe ? (
+        <ContextMenuContent align="start" className="w-60 p-0">
           {explore ? (
             <>
               {isSaved ? (
@@ -110,19 +135,32 @@ export default function AffirmationCard({
               )}
             </>
           ) : (
-            <>
+            <View className="flex flex-col gap-1">
               {affirmation.saved && (
                 <Button
+                  variant={'destructive'}
                   disabled={isUnsavePending}
                   onPress={() => unsave(affirmation.id)}
                 >
                   <Text>Remove from my list</Text>
                 </Button>
               )}
-            </>
+              {!hasAffirmationId(affirmation.id) ? (
+                <Button onPress={() => addAffirmationId(affirmation.id)}>
+                  <Text>Add to notifications list</Text>
+                </Button>
+              ) : (
+                <Button
+                  variant={'destructive'}
+                  onPress={() => removeAffirmationId(affirmation.id)}
+                >
+                  <Text>Remove from notifications list</Text>
+                </Button>
+              )}
+            </View>
           )}
         </ContextMenuContent>
-      )}
+      ) : null}
     </ContextMenu>
   );
 }

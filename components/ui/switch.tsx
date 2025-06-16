@@ -79,7 +79,7 @@ function SwitchNative({
     >
       <SwitchPrimitives.Root
         className={cn(
-          'h-8 w-[46px] shrink-0 flex-row items-center rounded-full border-2 border-transparent',
+          'h-8 w-[48px] shrink-0 flex-row items-center rounded-full border-2 border-transparent',
           props.checked ? 'bg-primary' : 'bg-input',
           className,
         )}
